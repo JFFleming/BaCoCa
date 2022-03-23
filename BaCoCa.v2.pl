@@ -30,7 +30,7 @@ print	"\n\n\t-------------------------------------------",
 		"\n\t             BaCoCa.v2\n\t",
 		"\n\tDeveloped by Patrick Kueck & Torsten Struck,\n\t",
 		"written by Patrick Kueck (ZFMK Bonn, 2012/13)\n\t",
-		"Version 2 Developed by James Fleming (NHM Oslo, 2022),\n\t"
+		"Version 2 Developed by James Fleming (NHM Oslo, 2022),\n\t",
 		"-------------------------------------------\n";
 
 
@@ -352,7 +352,7 @@ sub argv_handling{
 		for my $single_command ( sort @commands ){
 			
 			if 		( $single_command =~ /^i/i		){ ( $$sref_single_file	= $single_command	) =~ s/^.// } # Single Data file: -i *.phy or *.fas or *.aln
-			elsif 	( $single_command =~ /^c/i		){ ( $$sref_clades		= $single_command	) =~ s/^.// } # Clade file: -c *.txt
+#			elsif 	( $single_command =~ /^c/i		){ ( $$sref_clades		= $single_command	) =~ s/^.// } # Clade file: -c *.txt
 			elsif 	( $single_command =~ /^p/i		){ ( $$sref_partition		= $single_command	) =~ s/^.// } # Partition file: -p *.txt
 			elsif 	( $single_command =~ /^help$/i	){ &help and exit }
 			elsif 	( $single_command =~ /^v$/i		){ &version and exit }
@@ -1372,7 +1372,7 @@ sub calc_freq{
 				}
 				
 				$href_frequencies->{$$sref_infile}{$$sref_counter}{taxon}{MeanSites}{$taxon}{RCFV}		 = sprintf "%.4f",	( $href_frequencies->{$$sref_infile}{$$sref_counter}{taxon}{MeanSites}{$taxon}{RCFV} / $$sref_N_tax_complete );
-				$href_frequencies->{$$sref_infile}{$$sref_counter}{taxon}{MeanSites}{$taxon}{tRCFV}		 = sprintf "%.4f",	( ($href_frequencies->{$$sref_infile}{$$sref_counter}{taxon}{MeanSites}{$taxon}{RCFV}*($sequ_length**1.8)*(@taxa**0.6))/((@taxa**0.6)+($sequ_length**1.5)));								
+				$href_frequencies->{$$sref_infile}{$$sref_counter}{taxon}{MeanSites}{$taxon}{tRCFV} = sprintf "%.4f",( ($href_frequencies->{$$sref_infile}{$$sref_counter}{taxon}{MeanSites}{$taxon}{RCFV}*0.2)/((0.0004038+(0.0000004046*@taxa))+((-0.003759*sqrt(@taxa*$sequ_length)+0.3113*$sequ_length**0.2)/($sequ_length**0.2*sqrt(@taxa*$sequ_length)))));
 				$href_frequencies->{$$sref_infile}{$$sref_counter}{clade}{MeanSites}{RCFV}				+=					  $href_frequencies->{$$sref_infile}{$$sref_counter}{taxon}{MeanSites}{$taxon}{RCFV};
 				
 				for my $char ( 'purine', 'pyrimidine', 'AMB', 'GAP', 'AT' ){
